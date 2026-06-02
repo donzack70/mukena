@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mukena Naj — Rayon Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f7f3ee;
+      --cream-dark: #ede7dc;
+      --sand: #d4c5b0;
+      --brown: #8b6f4e;
+      --brown-dark: #5c4a35;
+      --text: #2c2420;
+      --text-light: #7a6a5a;
+      --white: #fdfaf7;
+      --gold: #c9a96e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247, 243, 238, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 197, 176, 0.4);
+      transition: padding 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--brown-dark);
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--brown); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 80px;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--brown-dark);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--brown);
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2vw, 28px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--sand);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-light);
+      max-width: 420px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      background: var(--brown-dark);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); }
+    .btn-primary svg { width: 18px; height: 18px; fill: currentColor; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 36px;
+      border: 1px solid var(--sand);
+      color: var(--brown);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--brown); background: var(--cream-dark); }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-dark);
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      animation: fadeIn 1.2s 0.3s forwards;
+    }
+    .hero-image-overlay {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      background: rgba(247, 243, 238, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 20px 28px;
+      border-left: 3px solid var(--gold);
+    }
+    .hero-image-overlay p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--brown-dark);
+    }
+    .hero-image-overlay span {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 100px 80px;
+      background: var(--white);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .feature-item { text-align: center; }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 20px;
+      color: var(--gold);
+    }
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--brown-dark);
+      margin-bottom: 10px;
+    }
+    .feature-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 300;
+      color: var(--brown-dark);
+      line-height: 1.15;
+    }
+    .section-title em { font-style: italic; color: var(--brown); }
+    .section-line {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px auto 0;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      padding: 100px 80px;
+      background: var(--cream);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-dark);
+      cursor: pointer;
+    }
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.6s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 36, 32, 0.75) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    /* ── ORDER CTA ── */
+    .order-section {
+      padding: 120px 80px;
+      background: var(--brown-dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .order-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(201, 169, 110, 0.15) 0%, transparent 70%);
+    }
+    .order-section .section-eyebrow { color: var(--gold); }
+    .order-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .order-title em { font-style: italic; color: var(--gold); }
+    .order-desc {
+      font-size: 15px;
+      color: rgba(247, 243, 238, 0.7);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.8;
+    }
+    .order-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .order-price-note {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(247, 243, 238, 0.5);
+      margin-bottom: 48px;
+    }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 48px;
+      background: #25D366;
+      color: white;
+      font-family: 'Jost', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-wa:hover { background: #1ebe5d; transform: translateY(-3px); }
+    .btn-wa svg { width: 22px; height: 22px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── TESTIMONIAL / INFO ── */
+    .info-section {
+      padding: 100px 80px;
+      background: var(--cream-dark);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .info-text .section-header { text-align: left; }
+    .info-text .section-line { margin-left: 0; }
+    .info-list { list-style: none; margin-top: 32px; }
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(212, 197, 176, 0.5);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-light);
+    }
+    .info-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 10px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .info-image {
+      position: relative;
+    }
+    .info-image img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .info-image-badge {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 110px;
+      height: 110px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .info-image-badge strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 600;
+      color: white;
+      line-height: 1;
+    }
+    .info-image-badge span {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px 80px;
+      background: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-text {
+      font-size: 12px;
+      color: rgba(247, 243, 238, 0.4);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 100px 24px 48px; }
+      .hero-image { height: 55vw; min-height: 320px; }
+      .features { padding: 60px 24px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .gallery { padding: 60px 24px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .order-section { padding: 80px 24px; }
+      .info-section { padding: 60px 24px; }
+      .info-grid { grid-template-columns: 1fr; gap: 40px; }
+      .info-image { display: none; }
+      footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Mukena <span>Naj</span></div>
+    <div class="nav-links">
+      <a href="#koleksi">Koleksi</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#order">Order</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Koleksi Terbaru 2025</p>
+      <h1 class="hero-title">Mukena <em>Naj</em><br>Rayon Premium</h1>
+      <p class="hero-subtitle">Cantik dalam ibadah</p>
+      <p class="hero-desc">Hadir dengan bahan rayon premium pilihan — adem, lembut di kulit, jatuh sempurna. Motif eksklusif dengan finishing renda elegan untuk menemani setiap sholat Anda.</p>
+      <div class="hero-cta">
+        <a href="#order" class="btn-primary">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.086 1.508 5.808L0 24l6.335-1.524A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.367l-.36-.214-3.727.897.929-3.618-.235-.372A9.818 9.818 0 112 12c0 5.413 4.405 9.818 9.818 9.818z"/></svg>
+          Order via WhatsApp
+        </a>
+        <a href="#koleksi" class="btn-secondary">Lihat Koleksi</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/1b29220cbb3e4d90911719ca3a2de26d~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Mukena Naj" />
+      <div class="hero-image-overlay">
+        <div>
+          <p>Bahan Rayon Premium</p>
+          <span>Adem • Lembut • Syar'i</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features reveal">
+    <div class="features-grid">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3 class="feature-title">Rayon Premium</h3>
+        <p class="feature-desc">Bahan pilihan yang adem, breathable, dan lembut di kulit sepanjang hari</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        <h3 class="feature-title">Anti Kusut</h3>
+        <p class="feature-desc">Jatuh sempurna, tidak mudah kusut, cocok untuk perjalanan jauh</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        <h3 class="feature-title">2 Pcs Lengkap</h3>
+        <p class="feature-desc">Atasan khimar panjang + rok, finishing renda elegan di tepi</p>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <h3 class="feature-title">Free Size</h3>
+        <p class="feature-desc">Potongan lebar dan syar'i, muat all size hingga XL dengan nyaman</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="koleksi">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Koleksi Motif</p>
+      <h2 class="section-title">Pilihan <em>Motif</em> Eksklusif</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/1b29220cbb3e4d90911719ca3a2de26d~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Bunga Colorful" />
+        <div class="gallery-overlay"><p class="gallery-label">Bunga Colorful — Orange</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/0f2c0ee923fb4a89806b2c89b32d8d07~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Geometric Marun" />
+        <div class="gallery-overlay"><p class="gallery-label">Geometric Abstract — Marun</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/948f8ed41ba84c92954a9953ffd0eea6~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Daun Navy" />
+        <div class="gallery-overlay"><p class="gallery-label">Daun Bunga — Navy</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/12103a1bb0dd47d7bf147427617ed82a~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Stripe Krem" />
+        <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Krem Peach</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/79f986dc768b490487e220fd812ad7ef~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Polkadot" />
+        <div class="gallery-overlay"><p class="gallery-label">Polkadot Classic — Krem</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/460f71e8192a4bf3ad941f8976d7b78e~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Stripe Pink" />
+        <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Dusty Pink</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/05ec379098ed4569a6e17638dc5d881b~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Mawar Pink" />
+        <div class="gallery-overlay"><p class="gallery-label">Bunga Mawar — Merah Muda</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/83b8c00661ee40649f1f33c5f16a10eb~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Stripe Gading" />
+        <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Krem Gading</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/898588150bcd4e5eb842e8a25344f2a9~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Daun Hitam" />
+        <div class="gallery-overlay"><p class="gallery-label">Daun Colorful — Hitam</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/02af19381ed442738798bd58d2ac07d4~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Stripe Pink Studio" />
+        <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Pink Studio</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/fae77470e8294040a10ff216aedb9cc0~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Stripe Krem Studio" />
+        <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Krem Studio</p></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/3126b6f211b34a5b8da35967a5350a84~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Daun Coklat" />
+        <div class="gallery-overlay"><p class="gallery-label">Daun Bunga — Peach Coklat</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section class="info-section" id="tentang">
+    <div class="info-grid">
+      <div class="info-text reveal">
+        <div class="section-header">
+          <p class="section-eyebrow">Kenapa Mukena Naj</p>
+          <h2 class="section-title">Kualitas yang <em>Terasa</em></h2>
+          <div class="section-line"></div>
+        </div>
+        <ul class="info-list">
+          <li>Bahan Rayon Premium — adem, breathable, tidak panas meski dipakai lama</li>
+          <li>2 pcs lengkap: atasan khimar panjang + rok panjang dengan finishing renda elegan</li>
+          <li>Motif eksklusif dengan warna tahan lama, tidak mudah pudar</li>
+          <li>FREE SIZE — potongan lebar dan syar'i, nyaman untuk semua ukuran hingga XL</li>
+          <li>Anti kusut, cocok dibawa bepergian dan disimpan di tas</li>
+          <li>Dikirim langsung dari Surabaya, dikemas rapi dan aman</li>
+        </ul>
+      </div>
+      <div class="info-image reveal">
+        <img src="https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/83b8c00661ee40649f1f33c5f16a10eb~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=15568&t=555f072d&ps=933b5bde&shp=5563f2fb&shcp=9cd7d13a&idc=my2&from=1432613627width=1254&height=1254" alt="Mukena Naj Detail" />
+        <div class="info-image-badge">
+          <strong>12</strong>
+          <span>Motif<br>Pilihan</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER CTA -->
+  <section class="order-section" id="order">
+    <div style="position:relative;z-index:1;">
+      <p class="section-eyebrow">Pesan Sekarang</p>
+      <h2 class="order-title">Jadikan Ibadahmu<br><em>Lebih Istimewa</em></h2>
+      <p class="order-desc">Ready stock, langsung proses. Hubungi kami via WhatsApp untuk pemesanan dan informasi ketersediaan motif.</p>
+      <div class="order-price">Rp 310.000</div>
+      <p class="order-price-note">Per set (atasan + rok) • Free size • Ready stock</p>
+      <a href="https://wa.me/6281234567890?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-wa" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.086 1.508 5.808L0 24l6.335-1.524A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.003-1.367l-.36-.214-3.727.897.929-3.618-.235-.372A9.818 9.818 0 112 12c0 5.413 4.405 9.818 9.818 9.818z"/></svg>
+        Chat WhatsApp Sekarang
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Mukena <span>Naj</span></div>
+    <p class="footer-text">© 2025 Mukena Naj · Surabaya, Indonesia</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
