@@ -480,6 +480,82 @@
       .info-image { display: none; }
       footer { padding: 32px 24px; flex-direction: column; text-align: center; }
     }
+
+    /* FORM SECTION */
+    .mobile-only { display: none; }
+    .desktop-only { display: block; }
+    @media (max-width: 900px) {
+      .mobile-only { display: block; }
+      .desktop-only { display: none; }
+    }
+    .form-section {
+      padding: 100px 80px;
+      background: var(--white);
+    }
+    .form-container {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .form-desc {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 48px;
+    }
+    .form-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+    }
+    .form-group label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-weight: 500;
+    }
+    .form-group input {
+      padding: 16px 20px;
+      border: 1px solid var(--sand);
+      background: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: var(--brown); }
+    .form-group input::placeholder { color: var(--text-light); }
+    .btn-submit {
+      padding: 18px 48px;
+      background: var(--brown-dark);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .btn-submit:hover { background: var(--brown); transform: translateY(-2px); }
+    .btn-submit:disabled { background: var(--sand); cursor: not-allowed; transform: none; }
+    .form-note {
+      font-size: 14px;
+      color: var(--brown);
+      min-height: 20px;
+    }
+    @media (max-width: 900px) {
+      .form-section { padding: 60px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -660,7 +736,48 @@
     </div>
   </section>
 
-  <section class="order-section" id="order">
+  <!-- FORM SECTION (desktop only) -->
+  <div class="desktop-only">
+  <section class="form-section" id="order">
+    <div class="form-container reveal">
+      <div class="section-header">
+        <p class="section-eyebrow">Tertarik dengan Mukena Naj?</p>
+        <h2 class="section-title">Tinggalkan <em>Nomor Anda</em></h2>
+        <div class="section-line"></div>
+      </div>
+      <p class="form-desc">Isi form di bawah, kami akan segera menghubungi Anda via WhatsApp untuk informasi motif dan pemesanan.</p>
+      <div class="form-wrap">
+        <div class="form-group">
+          <label>Nama</label>
+          <input type="text" id="nama" placeholder="Nama Anda" />
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="08xxxxxxxxxx" />
+        </div>
+        <button class="btn-submit" id="submitBtn" onclick="submitForm()">Kirim Sekarang</button>
+        <p class="form-note" id="form-status"></p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ORDER WA (mobile only) -->
+  <section class="order-section mobile-only" id="order-wa-mobile">
+    <div style="position:relative;z-index:1;">
+      <p class="section-eyebrow">Pesan Sekarang</p>
+      <h2 class="order-title">Jadikan Ibadahmu<br><em>Lebih Istimewa</em></h2>
+      <p class="order-desc">Ready stock, langsung proses. Hubungi kami via WhatsApp untuk pemesanan dan informasi ketersediaan motif.</p>
+      <div class="order-price">Rp 279.000</div>
+      <p class="order-price-note">Per set (atasan + rok) • Free size • Ready stock</p>
+      <a href="https://wa.me/6289682608170?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-wa" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:24px;height:24px;flex-shrink:0;" />
+        Chat WhatsApp Sekarang
+      </a>
+    </div>
+  </section>
+
+  <section class="order-section desktop-only" id="order-wa">
     <div style="position:relative;z-index:1;">
       <p class="section-eyebrow">Pesan Sekarang</p>
       <h2 class="order-title">Jadikan Ibadahmu<br><em>Lebih Istimewa</em></h2>
@@ -689,6 +806,43 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    async function submitForm() {
+      const nama = document.getElementById('nama').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const status = document.getElementById('form-status');
+      const btn = document.getElementById('submitBtn');
+
+      if (!nama || !whatsapp) {
+        status.style.color = '#c0392b';
+        status.textContent = 'Mohon isi nama dan nomor WhatsApp Anda.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Mengirim...';
+      status.textContent = '';
+
+      try {
+        await fetch('https://script.google.com/macros/s/AKfycbwvsBKvoQZ2owXWViIp9QQnSnKxLVOfzzI9TStVKDKWd0nWqXYMGLUaGYa4iTaF0pdpNw/exec', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nama, whatsapp })
+        });
+        status.style.color = '#27ae60';
+        status.textContent = 'Terima kasih! Kami akan segera menghubungi Anda. 🤍';
+        btn.textContent = 'Terkirim ✓';
+        document.getElementById('nama').value = '';
+        document.getElementById('whatsapp').value = '';
+      } catch (err) {
+        status.style.color = '#c0392b';
+        status.textContent = 'Gagal mengirim, coba lagi ya.';
+        btn.disabled = false;
+        btn.textContent = 'Kirim Sekarang';
+      }
+    }
+
   </script>
 
 </body>
