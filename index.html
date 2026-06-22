@@ -823,13 +823,21 @@
       btn.textContent = 'Mengirim...';
       status.textContent = '';
 
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwvsBKvoQZ2owXWViIp9QQnSnKxLVOfzzI9TStVKDKWd0nWqXYMGLUaGYa4iTaF0pdpNw/exec';
+
       try {
-        await fetch('https://script.google.com/macros/s/AKfycbwvsBKvoQZ2owXWViIp9QQnSnKxLVOfzzI9TStVKDKWd0nWqXYMGLUaGYa4iTaF0pdpNw/exec', {
+        // Gunakan form-encoded agar tidak kena CORS preflight
+        const formData = new FormData();
+        formData.append('nama', nama);
+        formData.append('whatsapp', whatsapp);
+        formData.append('origin', window.location.origin);
+
+        await fetch(SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nama, whatsapp })
+          body: formData
         });
+
         status.style.color = '#27ae60';
         status.textContent = 'Terima kasih! Kami akan segera menghubungi Anda. 🤍';
         btn.textContent = 'Terkirim ✓';
