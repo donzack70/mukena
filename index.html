@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '666817977439321');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=666817977439321&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mukena Naj — Rayon Premium</title>
@@ -576,7 +594,7 @@
       <p class="hero-subtitle">Cantik dalam ibadah</p>
       <p class="hero-desc">Hadir dengan bahan rayon premium pilihan — adem, lembut di kulit, jatuh sempurna. Motif eksklusif dengan finishing renda elegan untuk menemani setiap sholat Anda.</p>
       <div class="hero-cta">
-        <a href="#order" class="btn-primary">
+        <a href="#order" class="btn-primary" onclick="fbq('track', 'ViewContent')">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width:18px;height:18px;" />
           Order via WhatsApp
         </a>
@@ -778,7 +796,7 @@
       <p class="order-desc">Ready stock, langsung proses. Hubungi kami via WhatsApp untuk pemesanan dan informasi ketersediaan motif.</p>
       <div class="order-price">Rp 279.000</div>
       <p class="order-price-note">Per set (atasan + rok) • Free size • Ready stock</p>
-      <a href="https://wa.me/6281332810038?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-wa" target="_blank">
+      <a href="https://wa.me/6281332810038?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-wa" target="_blank" onclick="fbq('track', 'Contact')">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:24px;height:24px;flex-shrink:0;" />
         Chat WhatsApp Sekarang
       </a>
@@ -792,7 +810,7 @@
       <p class="order-desc">Ready stock, langsung proses. Hubungi kami via WhatsApp untuk pemesanan dan informasi ketersediaan motif.</p>
       <div class="order-price">Rp 279.000</div>
       <p class="order-price-note">Per set (atasan + rok) • Free size • Ready stock</p>
-      <a href="https://wa.me/6281332810038?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-wa" target="_blank">
+      <a href="https://wa.me/6281332810038?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-wa" target="_blank" onclick="fbq('track', 'Contact')">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:24px;height:24px;flex-shrink:0;" />
         Chat WhatsApp Sekarang
       </a>
@@ -848,6 +866,7 @@
 
         status.style.color = '#27ae60';
         status.textContent = 'Terima kasih! Kami akan segera menghubungi Anda. 🤍';
+        fbq('track', 'Lead');
         btn.textContent = 'Terkirim ✓';
         document.getElementById('nama').value = '';
         document.getElementById('whatsapp').value = '';
