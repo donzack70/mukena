@@ -126,9 +126,18 @@
       line-height: 1.8;
       color: var(--text);
       max-width: 420px;
-      margin-bottom: 48px;
+      margin-bottom: 22px;
       opacity: 0;
       animation: fadeUp 0.8s 0.6s forwards;
+    }
+    .hero-offer {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--brown-dark);
+      font-weight: 500;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards;
     }
     .hero-cta {
       display: flex;
@@ -137,6 +146,8 @@
       opacity: 0;
       animation: fadeUp 0.8s 0.8s forwards;
     }
+    .cta-desktop { display: inline-flex; }
+    .cta-mobile { display: none; }
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -303,9 +314,28 @@
     .gallery-item:hover .gallery-overlay { opacity: 1; }
     .gallery-label {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 15px;
+      font-size: 17px;
       font-style: italic;
       color: var(--cream);
+    }
+    .gallery-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .gallery-order-btn {
+      display: inline-flex;
+      padding: 9px 13px;
+      background: rgba(247, 243, 238, 0.95);
+      color: var(--brown-dark);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
     }
 
     /* ORDER CTA */
@@ -487,11 +517,20 @@
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-text { padding: 100px 24px 48px; }
       .hero-image { height: 55vw; min-height: 320px; }
+      .cta-desktop { display: none; }
+      .cta-mobile { display: inline-flex; }
       .features { padding: 60px 24px; }
       .features-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .gallery { padding: 60px 24px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-item.featured { grid-column: span 2; grid-row: span 1; }
+      .gallery-overlay {
+        opacity: 1;
+        padding: 14px;
+        background: linear-gradient(to top, rgba(44, 36, 32, 0.86) 0%, transparent 68%);
+      }
+      .gallery-label { font-size: 14px; }
+      .gallery-order-btn { padding: 8px 10px; font-size: 9px; }
       .order-section { padding: 80px 24px; }
       .info-section { padding: 60px 24px; }
       .info-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -593,10 +632,15 @@
       <h1 class="hero-title">Mukena <em>Naj</em><br>Rayon Premium</h1>
       <p class="hero-subtitle">Cantik dalam ibadah</p>
       <p class="hero-desc">Hadir dengan bahan rayon premium pilihan — adem, lembut di kulit, jatuh sempurna. Motif eksklusif dengan finishing renda elegan untuk menemani setiap sholat Anda.</p>
+      <p class="hero-offer">Rp 279.000/set • Atasan + rok • Ready stock</p>
       <div class="hero-cta">
-        <a href="#order" class="btn-primary" onclick="fbq('track', 'ViewContent')">
+        <a href="#order" class="btn-primary cta-desktop" onclick="fbq('track', 'ViewContent')">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width:18px;height:18px;" />
-          Order via WhatsApp
+          Minta Dihubungi
+        </a>
+        <a href="https://wa.me/6281332810038?text=Halo%20kak,%20saya%20mau%20order%20Mukena%20Naj%20Rayon%20Premium.%20Motif%20yang%20tersedia%20apa%20saja?" class="btn-primary cta-mobile" target="_blank" onclick="fbq('track', 'Purchase', {value: 279000, currency: 'IDR'})">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" style="width:18px;height:18px;" />
+          Chat &amp; Pilih Motif
         </a>
         <a href="#koleksi" class="btn-secondary">Lihat Koleksi</a>
       </div>
@@ -668,87 +712,87 @@
 
       <!-- Featured -->
       <div class="gallery-item featured">
-        <img src="mukena%2019.png" alt="Bunga Kecil Sage Green" />
+        <img src="mukena%2019.png" alt="Bunga Kecil Sage Green" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Kecil — Sage Green</p></div>
       </div>
       <!-- Row 1 -->
       <div class="gallery-item">
-        <img src="mukena%2022.png" alt="Bunga Kecil Olive" />
+        <img src="mukena%2022.png" alt="Bunga Kecil Olive" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Kecil — Olive</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2014.png" alt="Bunga Kecil Mauve" />
+        <img src="mukena%2014.png" alt="Bunga Kecil Mauve" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Kecil — Mauve</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2023.png" alt="Polkadot Hitam" />
+        <img src="mukena%2023.png" alt="Polkadot Hitam" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Polkadot Kecil — Hitam</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2024.png" alt="Bunga Pink Ungu Peach" />
+        <img src="mukena%2024.png" alt="Bunga Pink Ungu Peach" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Kecil — Pink Peach</p></div>
       </div>
       <!-- Row 2 -->
       <div class="gallery-item">
-        <img src="mukena%2018.png" alt="Bunga Bouquet Purple" />
+        <img src="mukena%2018.png" alt="Bunga Bouquet Purple" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Bouquet — Dusty Purple</p></div>
       </div>
 
       <!-- Row 3 -->
       <div class="gallery-item">
-        <img src="mukena%2015.png" alt="Bunga Abstract Pink" />
+        <img src="mukena%2015.png" alt="Bunga Abstract Pink" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Abstract — Dusty Pink</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2016.png" alt="Bunga Colorful Pink" />
+        <img src="mukena%2016.png" alt="Bunga Colorful Pink" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Colorful — Pink</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%202.webp" alt="Bunga Colorful Orange" />
+        <img src="mukena%202.webp" alt="Bunga Colorful Orange" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Colorful — Orange</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%201.webp" alt="Geometric Marun" />
+        <img src="mukena%201.webp" alt="Geometric Marun" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Geometric Abstract — Marun</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%203.webp" alt="Daun Navy" />
+        <img src="mukena%203.webp" alt="Daun Navy" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Daun Bunga — Navy</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%204.webp" alt="Stripe Krem" />
+        <img src="mukena%204.webp" alt="Stripe Krem" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Krem Peach</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%205.webp" alt="Polkadot" />
+        <img src="mukena%205.webp" alt="Polkadot" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Polkadot Classic — Krem</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%206.webp" alt="Stripe Pink" />
+        <img src="mukena%206.webp" alt="Stripe Pink" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Dusty Pink</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%208.webp" alt="Mawar Pink" />
+        <img src="mukena%208.webp" alt="Mawar Pink" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Bunga Mawar — Merah Muda</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2021.png" alt="Grid Bunga Navy" />
+        <img src="mukena%2021.png" alt="Grid Bunga Navy" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Grid Bunga — Navy</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2010.webp" alt="Daun Hitam" />
+        <img src="mukena%2010.webp" alt="Daun Hitam" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Daun Colorful — Hitam</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2011.webp" alt="Stripe Pink Studio" />
+        <img src="mukena%2011.webp" alt="Stripe Pink Studio" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Pink Studio</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%207.webp" alt="Stripe Krem Studio" />
+        <img src="mukena%207.webp" alt="Stripe Krem Studio" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Stripe Etnik — Krem Studio</p></div>
       </div>
       <div class="gallery-item">
-        <img src="mukena%2012.webp" alt="Daun Coklat" />
+        <img src="mukena%2012.webp" alt="Daun Coklat" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">Daun Bunga — Peach Coklat</p></div>
       </div>
     </div>
@@ -772,7 +816,7 @@
         </ul>
       </div>
       <div class="info-image reveal">
-        <img src="mukena%2018.png" alt="Mukena Naj Detail" />
+        <img src="mukena%2018.png" alt="Mukena Naj Detail" loading="lazy" />
         <div class="info-image-badge">
           <strong>Rayon</strong>
           <span>Premium</span>
@@ -876,6 +920,12 @@
         formData.append('nama', nama);
         formData.append('whatsapp', whatsapp);
         formData.append('origin', window.location.origin);
+        formData.append('page_url', window.location.href);
+        formData.append('referrer', document.referrer || '');
+
+        const params = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid']
+          .forEach(key => formData.append(key, params.get(key) || ''));
 
         await fetch(SCRIPT_URL, {
           method: 'POST',
@@ -896,6 +946,31 @@
         btn.textContent = 'Kirim Sekarang';
       }
     }
+
+    // Buat seluruh kartu motif bisa dipesan langsung melalui WhatsApp.
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const overlay = item.querySelector('.gallery-overlay');
+      const label = item.querySelector('.gallery-label');
+      if (!overlay || !label) return;
+
+      const motif = label.textContent.trim();
+      const actions = document.createElement('div');
+      actions.className = 'gallery-actions';
+      label.parentNode.insertBefore(actions, label);
+      actions.appendChild(label);
+
+      const orderLink = document.createElement('a');
+      orderLink.className = 'gallery-order-btn';
+      orderLink.target = '_blank';
+      orderLink.rel = 'noopener';
+      orderLink.textContent = 'Pilih Motif Ini';
+      orderLink.href = 'https://wa.me/6281332810038?text=' +
+        encodeURIComponent('Halo kak, saya tertarik Mukena Naj motif ' + motif + '. Apakah masih tersedia?');
+      orderLink.addEventListener('click', () => {
+        fbq('track', 'Purchase', { value: 279000, currency: 'IDR', content_name: motif });
+      });
+      actions.appendChild(orderLink);
+    });
 
   </script>
 
