@@ -524,13 +524,44 @@
       .gallery { padding: 60px 24px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .gallery-item.featured { grid-column: span 2; grid-row: span 1; }
-      .gallery-overlay {
-        opacity: 1;
-        padding: 14px;
-        background: linear-gradient(to top, rgba(44, 36, 32, 0.86) 0%, transparent 68%);
+      .gallery-item {
+        aspect-ratio: auto;
+        display: flex;
+        flex-direction: column;
+        background: var(--white);
       }
-      .gallery-label { font-size: 14px; }
-      .gallery-order-btn { padding: 8px 10px; font-size: 9px; }
+      .gallery-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        object-position: center top;
+      }
+      .gallery-overlay {
+        position: static;
+        opacity: 1;
+        padding: 12px;
+        background: var(--white);
+        display: block;
+      }
+      .gallery-actions {
+        width: 100%;
+        gap: 9px;
+      }
+      .gallery-label {
+        min-height: 38px;
+        font-size: 14px;
+        line-height: 1.3;
+        color: var(--brown-dark);
+      }
+      .gallery-order-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 9px 7px;
+        background: var(--brown-dark);
+        color: var(--cream);
+        font-size: 8px;
+      }
       .order-section { padding: 80px 24px; }
       .info-section { padding: 60px 24px; }
       .info-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -646,7 +677,7 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="mukena%2019.png" alt="Mukena Naj" />
+      <img src="M28.png" alt="Mukena Naj M28 Mini Floral Soft Mauve" />
       <div class="hero-image-overlay">
         <div>
           <p>Bahan Rayon Premium</p>
@@ -705,16 +736,11 @@
         <img src="M25.png" alt="Stripe Floral Dusty Pink" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">M25 — Stripe Floral Dusty Pink</p></div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item featured">
         <img src="M28.png" alt="Mini Floral Soft Mauve" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">M28 — Mini Floral Soft Mauve</p></div>
       </div>
 
-      <!-- Featured -->
-      <div class="gallery-item featured">
-        <img src="mukena%2019.png" alt="Bunga Kecil Sage Green" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">Bunga Kecil — Sage Green</p></div>
-      </div>
       <!-- Row 1 -->
       <div class="gallery-item">
         <img src="mukena%2022.png" alt="Bunga Kecil Olive" loading="lazy" />
