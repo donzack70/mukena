@@ -288,26 +288,6 @@
       cursor: pointer;
       aspect-ratio: 3/4;
     }
-    .gallery-item.sold-out {
-      cursor: default;
-    }
-    .gallery-item.sold-out img {
-      filter: grayscale(0.25) brightness(0.82);
-    }
-    .gallery-item.sold-out::before {
-      content: "Sold Out";
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      z-index: 2;
-      padding: 8px 12px;
-      background: rgba(92, 74, 53, 0.92);
-      color: var(--cream);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
     .gallery-item.featured {
       grid-column: span 2;
       grid-row: span 2;
@@ -356,11 +336,6 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
-    }
-    .gallery-order-btn.is-sold-out {
-      pointer-events: auto;
-      background: rgba(92, 74, 53, 0.95);
-      color: var(--cream);
     }
 
     /* ORDER CTA */
@@ -587,11 +562,6 @@
         color: var(--cream);
         font-size: 8px;
       }
-      .gallery-item.sold-out::before {
-        top: 10px;
-        right: 10px;
-        font-size: 9px;
-      }
       .order-section { padding: 80px 24px; }
       .info-section { padding: 60px 24px; }
       .info-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -800,10 +770,6 @@
       </div>
 
       <!-- Row 1 -->
-      <div class="gallery-item sold-out" data-status="sold-out">
-        <img src="mukena%2022.png" alt="Bunga Kecil Olive" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">M22 — Bunga Kecil Olive</p></div>
-      </div>
       <div class="gallery-item">
         <img src="mukena%2014.png" alt="Bunga Kecil Mauve" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">M14 — Bunga Kecil Mauve</p></div>
@@ -817,20 +783,6 @@
         <div class="gallery-overlay"><p class="gallery-label">M24 — Bunga Kecil Pink Peach</p></div>
       </div>
       <!-- Row 2 -->
-      <div class="gallery-item sold-out" data-status="sold-out">
-        <img src="mukena%2018.png" alt="Bunga Bouquet Purple" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">M18 — Bunga Bouquet Dusty Purple</p></div>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="gallery-item sold-out" data-status="sold-out">
-        <img src="mukena%2015.png" alt="Bunga Abstract Pink" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">M15 — Bunga Abstract Dusty Pink</p></div>
-      </div>
-      <div class="gallery-item sold-out" data-status="sold-out">
-        <img src="mukena%2016.png" alt="Bunga Colorful Pink" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">M16 — Bunga Colorful Pink</p></div>
-      </div>
       <div class="gallery-item">
         <img src="mukena%202.webp" alt="Bunga Colorful Orange" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">M02 — Bunga Colorful Orange</p></div>
@@ -838,10 +790,6 @@
       <div class="gallery-item">
         <img src="mukena%201.webp" alt="Geometric Marun" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">M01 — Geometric Abstract Marun</p></div>
-      </div>
-      <div class="gallery-item sold-out" data-status="sold-out">
-        <img src="mukena%203.webp" alt="Daun Navy" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">M03 — Daun Bunga Navy</p></div>
       </div>
       <div class="gallery-item">
         <img src="mukena%204.webp" alt="Stripe Krem" loading="lazy" />
@@ -862,10 +810,6 @@
       <div class="gallery-item">
         <img src="mukena%2021.png" alt="Grid Bunga Navy" loading="lazy" />
         <div class="gallery-overlay"><p class="gallery-label">M21 — Grid Bunga Navy</p></div>
-      </div>
-      <div class="gallery-item sold-out" data-status="sold-out">
-        <img src="mukena%2010.webp" alt="Daun Hitam" loading="lazy" />
-        <div class="gallery-overlay"><p class="gallery-label">M10 — Daun Colorful Hitam</p></div>
       </div>
       <div class="gallery-item">
         <img src="mukena%2011.webp" alt="Stripe Pink Studio" loading="lazy" />
@@ -1043,25 +987,19 @@
       label.parentNode.insertBefore(actions, label);
       actions.appendChild(label);
 
-      const isSoldOut = item.dataset.status === 'sold-out' || item.classList.contains('sold-out');
       const orderLink = document.createElement('a');
       orderLink.className = 'gallery-order-btn';
       orderLink.target = '_blank';
       orderLink.rel = 'noopener';
-      orderLink.textContent = isSoldOut ? 'Cari Motif Mirip' : 'Pilih Motif Ini';
-      if (isSoldOut) orderLink.classList.add('is-sold-out');
+      orderLink.textContent = 'Pilih Motif Ini';
       orderLink.href = 'https://wa.me/6281332810038?text=' +
-        encodeURIComponent(
-          isSoldOut
-            ? 'Halo kak, saya tertarik Mukena Naj motif ' + motif + ' yang sold out. Ada rekomendasi motif yang mirip dan ready?'
-            : 'Halo kak, saya tertarik Mukena Naj motif ' + motif + '. Apakah masih tersedia?'
-        );
+        encodeURIComponent('Halo kak, saya tertarik Mukena Naj motif ' + motif + '. Apakah masih tersedia?');
       orderLink.addEventListener('click', () => {
         fbq('track', 'Purchase', {
           value: 279000,
           currency: 'IDR',
           content_name: motif,
-          content_status: isSoldOut ? 'sold_out_recommendation' : 'ready'
+          content_status: 'ready'
         });
       });
       actions.appendChild(orderLink);
